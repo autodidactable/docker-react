@@ -9,3 +9,18 @@ before_install:
 script:
   - docker run -e CI=true autodidakt/docker-react npm run test -- --coverage
 
+deploy:
+  provider: elasticbeanstalk #by default, Travis CI supports certain providers for deployment.
+  region: "us-west-1" #URL from AWS website - http://dockerreact-env.eba-7daa9tnk.us-west-1.elasticbeanstalk.com/
+  app: "docker-react" #should match the applicaiton name on elastic beanstalk on AWS
+  env: "DockerReact-env" #should match the env name on elastic beanstalk on AWS
+  bucket_name: "elasticbeanstalk-us-west-1-555582514082" #represents the Hardrive on AWS. Can be grabbed from the list of S3 buckets.
+  bucket_path: "docker-react" #should be same as the app name.
+  on:
+    branch: master #This indicates that only code changes pushed to master will trigger CI/CD
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+
+
+
