@@ -1,4 +1,3 @@
-language: generic
 sudo: required #need root user access for all builds.
 service:
   - docker
@@ -19,7 +18,7 @@ deploy:
   on:
     branch: master #This indicates that only code changes pushed to master will trigger CI/CD
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: "$AWS_SECRET_KEY"
+  secret_access_key: $AWS_SECRET_KEY
 
 
 
